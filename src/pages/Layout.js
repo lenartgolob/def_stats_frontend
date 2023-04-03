@@ -1,19 +1,19 @@
 import { Outlet, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { AutoComplete } from 'primereact/autocomplete';
+import { useNavigate } from 'react-router-dom';
 
 
 function Layout() {
   const [players, setPlayers] = useState([]);
   const [playerSuggestions, setPlayerSuggestions] = useState([]);
   const [player, setPlayer] = useState("");
-  const [data, setData] = useState("");
+  const navigate = useNavigate();
 
   const getData = async () => {
     const resp = await fetch('http://localhost:5000/players');
     const json = await resp.json();
     setPlayers(json.map(a => a.Player));
-    setData(json);
   }
 
   const filterPlayers = function(e) {
@@ -23,9 +23,17 @@ function Layout() {
     setPlayerSuggestions(results);
   };
 
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      navigate(`/player/${playerSuggestions}`);
+      window.location.reload();
+    }
+  }
+
   useEffect(() => {
     getData();
   }, []);
+
   return(
     <>
       <nav>
@@ -39,7 +47,7 @@ function Layout() {
         </ul>
       </nav>
       <div>
-        <AutoComplete value={player} suggestions={playerSuggestions} completeMethod={filterPlayers} onChange={e => setPlayer(e.target.value)}  />
+        <AutoComplete value={player} suggestions={playerSuggestions} completeMethod={filterPlayers} onChange={e => setPlayer(e.target.value)} onKeyPress={handleKeyPress}  />
         {/* <AutoComplete
           className="p-autocomplete"
           multiple={true}

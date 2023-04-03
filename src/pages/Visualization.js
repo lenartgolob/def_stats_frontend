@@ -1,5 +1,8 @@
-const Vizualization = () => {
-    return <h1>Vizualization</h1>;
-  };
-  
-  export default Vizualization;
+function Visualization() {
+
+  return(
+      <div>Visualization</div>
+  );
+}
+
+export default Visualization;
