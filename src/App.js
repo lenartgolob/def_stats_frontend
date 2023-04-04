@@ -5,6 +5,7 @@ import Index from "./pages/Index";
 import Player from "./pages/Player";
 import Visualization from "./pages/Visualization";
 import Seasons from "./pages/Seasons";
+import Season from "./pages/Season";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="visualization" element={<Visualization />} />
           <Route path="seasons" element={<Seasons />} />
           <Route path="player/:player" element={<Player />} />
+          <Route path="season/:year" element={<Season />} />
         </Route>
       </Routes>
     </BrowserRouter>

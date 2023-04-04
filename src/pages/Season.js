@@ -2,12 +2,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
-function Player() {
-  const { player } = useParams();
+function Season() {
+  const { year } = useParams();
   const [seasons, setSeasons] = useState([]);
 
   const columns = [
-    { field: "id", headerName: "Year" },
+    { field: "id", headerName: "Rank" },
     { field: "player", headerName: "Player" },
     { field: "team", headerName: "Team" },
     { field: "gp", headerName: "GP" },
@@ -25,18 +25,23 @@ function Player() {
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch("http://localhost:5000/player?name=" + player);
+      const resp = await fetch(
+        "http://localhost:5000/season?year=" + year.replace("-", "/")
+      );
       const json = await resp.json();
+      json.map((item, index) => {
+        item.id = (index+1).toString();
+        return item;
+      });
       setSeasons(json);
     };
-  
+
     getData();
-  }, [player]);
-  
+  }, [year]);
 
   return (
     <div>
-      <h1>{player}</h1>
+      <h1>{year}</h1>
       <div style={{ height: 500, width: "95%" }}>
         <DataGrid rows={seasons} columns={columns} />
       </div>
@@ -48,4 +53,4 @@ function Player() {
   );
 }
 
-export default Player;
+export default Season;
