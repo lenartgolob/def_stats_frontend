@@ -1,6 +1,5 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AutoComplete } from "primereact/autocomplete";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
@@ -11,16 +10,13 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -37,38 +33,8 @@ const Search = styled("div")(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
-
-const pages = ["Products", "Pricing", "Blog"];
-
 function Layout() {
   const [players, setPlayers] = useState([]);
-  const [playerSuggestions, setPlayerSuggestions] = useState([]);
   const [player, setPlayer] = useState("");
   const navigate = useNavigate();
 
@@ -78,22 +44,26 @@ function Layout() {
     setPlayers(json.map((a) => a.Player));
   };
 
-  const filterPlayers = function (e) {
-    let results = players.filter((player) => {
-      return player.toLowerCase().startsWith(e.query.toLowerCase());
-    });
-    setPlayerSuggestions(results);
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleOpenNavMenu = () => {
+    setAnchorElNav(true);
   };
 
-  function handleKeyPress(event) {
-    if (event.key === "Enter") {
-      navigate(`/player/${playerSuggestions}`);
-    }
-  }
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(false);
+  };
 
-  function navigateTo(path) {
+  function handleCloseNavMenuNavigate(path) {
+    setAnchorElNav(false);
     navigate(path);
   }
+
+  const handleInputChange = (event, value) => {
+    console.log("lala");
+    console.log(value);
+    setPlayer(value);
+  };
 
   useEffect(() => {
     getData();
@@ -130,6 +100,7 @@ function Layout() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
+                onClick={handleOpenNavMenu}
               >
                 <MenuIcon />
               </IconButton>
@@ -144,14 +115,26 @@ function Layout() {
                   vertical: "top",
                   horizontal: "left",
                 }}
+                open={anchorElNav}
+                onClose={handleCloseNavMenu}
                 sx={{
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <MenuItem key="Seasons">
+                <MenuItem
+                  key="Seasons"
+                  onClick={() => {
+                    handleCloseNavMenuNavigate("/seasons");
+                  }}
+                >
                   <Typography textAlign="center">Seasons</Typography>
                 </MenuItem>
-                <MenuItem key="Visualization">
+                <MenuItem
+                  key="Visualization"
+                  onClick={() => {
+                    handleCloseNavMenuNavigate("/visualization");
+                  }}
+                >
                   <Typography textAlign="center">Visualization</Typography>
                 </MenuItem>
               </Menu>
@@ -179,14 +162,18 @@ function Layout() {
               <Button
                 key="Seasons"
                 sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => { navigateTo("/seasons");}}
+                onClick={() => {
+                  navigate("/seasons");
+                }}
               >
                 Seasons
               </Button>
               <Button
                 key="Visualization"
                 sx={{ my: 2, color: "white", display: "block" }}
-                onClick={() => { navigateTo("/visualization");}}
+                onClick={() => {
+                  navigate("/visualization");
+                }}
               >
                 Visualization
               </Button>
@@ -201,8 +188,14 @@ function Layout() {
                 id="combo-box-demo"
                 options={players}
                 sx={{ width: 300 }}
+                onChange={handleInputChange}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(`/player/${player}`);
+                  }
+                }}
                 renderInput={(params) => (
-                  <TextField {...params} label="Movie" />
+                  <TextField {...params} label="Search" />
                 )}
               />
             </Search>
