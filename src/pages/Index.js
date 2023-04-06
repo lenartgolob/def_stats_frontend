@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { Link } from '@mui/material';
 
 function Index() {
 
@@ -7,7 +8,14 @@ function Index() {
 
   const columns = [
     { field: "id", headerName: "Rank" },
-    { field: "player", headerName: "Player" },
+    { field: "player", 
+      headerName: "Player",
+      renderCell: (params) => (
+        <Link href={`/player/${params.value}`} underline="none">
+          {params.value}
+        </Link>
+      ),
+    },
     { field: "team", headerName: "Team" },
     { field: "gp", headerName: "GP" },
     { field: "min", headerName: "MIN" },
@@ -39,7 +47,7 @@ function Index() {
   return (
     <div>
       <h1>Best defenders of 22/23</h1>
-      <div style={{ width: "95%" }}>
+      <div style={{ width: "95%", margin: "0 auto" }}>
         <DataGrid rows={players} columns={columns} autoHeight />
       </div>
       <br />

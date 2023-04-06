@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { Link } from '@mui/material';
 
 function Season() {
   const { year } = useParams();
@@ -8,8 +9,14 @@ function Season() {
 
   const columns = [
     { field: "id", headerName: "Rank" },
-    { field: "player", headerName: "Player" },
-    { field: "team", headerName: "Team" },
+    { field: "player", 
+      headerName: "Player",
+      renderCell: (params) => (
+        <Link href={`/player/${params.value}`} underline="none">
+          {params.value}
+        </Link>
+      ),
+    },    { field: "team", headerName: "Team" },
     { field: "gp", headerName: "GP" },
     { field: "min", headerName: "MIN" },
     { field: "pts", headerName: "PTS" },
@@ -42,7 +49,7 @@ function Season() {
   return (
     <div>
       <h1>{year}</h1>
-      <div style={{ height: 500, width: "95%" }}>
+      <div style={{ height: 500, width: "95%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} />
       </div>
       <br />
