@@ -9,6 +9,7 @@ function Player() {
   const [image, setImage] = useState();
   const [position, setPosition] = useState();
   const [team, setTeam] = useState();
+  const [active, setActive] = useState();
 
 
   const columns = [
@@ -28,6 +29,14 @@ function Player() {
     { field: "def", headerName: "DEF" },
   ];
 
+  const seasonWithHighestDef = seasons.reduce((acc, curr) => {
+    if (curr.def > acc.def) {
+      return curr;
+    } else {
+      return acc;
+    }
+  }, {def: -Infinity}); 
+
   useEffect(() => {
     const getData = async () => {
       const resp = await fetch("http://localhost:5000/player?name=" + player);
@@ -37,12 +46,14 @@ function Player() {
       setPosition(s.position);
       setTeam(s.team);
       setSeasons(json);
+      console.log(json);
     };
 
     const getImage = async () => {
       const resp = await fetch("http://localhost:5000/image?name=" + player);
       const json = await resp.json();
       setImage(json.link);
+      setActive(json.active)
     };
 
     getData();
@@ -61,28 +72,28 @@ function Player() {
               marginBottom: "20px",
             }}
           >
-            • {position}, • {team}
+            • {position}, • {active ? team : "Retired"}
           </div>
           <div>
             <div className="stats-container">
               <div style={{ marginRight: "20px" }}>
                 <div className="stat-category">PPG</div>
-                <div className="stat-num">{season.pts}</div>
+                <div className="stat-num">{active ? season.pts : seasonWithHighestDef.pts}</div>
               </div>
               <div style={{ marginRight: "20px" }}>
                 <div className="stat-category">REB</div>
-                <div className="stat-num">{season.reb}</div>
+                <div className="stat-num">{active ? season.reb : seasonWithHighestDef.reb}</div>
               </div>
               <div style={{ marginRight: "20px" }}>
                 <div className="stat-category">AST</div>
-                <div className="stat-num">{season.ast}</div>
+                <div className="stat-num">{active ? season.ast : seasonWithHighestDef.ast}</div>
               </div>
               <div>
                 <div className="stat-category">DEF</div>
-                <div className="stat-num">{season.def}</div>
+                <div className="stat-num">{active ? season.def : seasonWithHighestDef.def}</div>
               </div>
             </div>
-            <div style={{width: '245px', textAlign: 'center'}}>2022-23 REGULAR SEASON</div>
+            <div style={{width: '210px', textAlign: 'center', fontSize: '95%'}}>{active ? "2022-23 REGULAR SEASON" : seasonWithHighestDef.id + " - BEST DEFENSIVE SEASON"}</div>
           </div>
         </div>
         <div className="img-container">

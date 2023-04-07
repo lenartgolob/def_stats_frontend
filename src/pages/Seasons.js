@@ -1,8 +1,8 @@
 function Seasons() {
 
     return(
-        <div>
-            <p>Our data currently supports data from seasons 13/14 to 22/23</p>
+        <div style={{paddingLeft: "75px"}}>
+            <div style={{marginTop: "30px"}}>Our data currently supports data from seasons 13/14 to 22/23</div>
             <ul>
                 <li><a href="/season/13-14">13/14</a></li>
                 <li><a href="/season/14-15">14/15</a></li>
