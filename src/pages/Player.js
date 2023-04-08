@@ -64,7 +64,7 @@ function Player() {
     <div>
       <div className="player-card">
         <div>
-          <div style={{ fontSize: "250%", fontWeight: "bold" }}>{player}</div>
+          <div className="player-name" style={{ fontSize: "250%", fontWeight: "bold" }}>{player}</div>
           <div
             style={{
               textAlign: "center",
@@ -93,14 +93,15 @@ function Player() {
                 <div className="stat-num">{active ? season.def : seasonWithHighestDef.def}</div>
               </div>
             </div>
-            <div style={{width: '210px', textAlign: 'center', fontSize: '95%'}}>{active ? "2022-23 REGULAR SEASON" : seasonWithHighestDef.id + " - BEST DEFENSIVE SEASON"}</div>
+            <div className="player-text" style={{width: '210px', textAlign: 'center', fontSize: '95%'}}>{active ? "2022-23 REGULAR SEASON" : seasonWithHighestDef.id + " - BEST DEFENSIVE SEASON"}</div>
           </div>
         </div>
         <div className="img-container">
           <div></div>
-          <div style={{ width: "300px", height: "219.23px" }}>
+          <div className="img-div">
             <img
               src={image}
+              className="image"
               style={{ width: "300px", height: "219.23px" }}
               alt="headshot"
             />

@@ -67,3 +67,103 @@ code {
   width: 500px;
 }
 
+.MuiDataGrid-columnHeaders {
+  background-color: #0B233F;
+  color: white;
+}
+
+.MuiDataGrid-columnHeaderTitle {
+  font-weight: 500 !important;
+
+}
+
+.MuiListItem-button:hover {
+  background-color: #0B233F !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.img-div {
+  width: 300px; 
+  height: 219.23px;
+  display: block;
+}
+
+.home-link {
+  display: none;
+}
+
+.index-text {
+  font-size: 170%;
+  font-weight: bold;
+  margin-top: 50px;
+  padding-right: 40px;
+}
+
+.footer {
+  background-color: #0B233F !important;
+  text-align: center;
+
+}
+
+.footer-text {
+margin: 0 auto !important; }
+
+@media only screen and (max-width: 600px) {
+  .player-card {
+    padding-top: 20px;
+    background-color: #0B233F;
+    color: white;
+    margin-bottom: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: block;
+  }
+
+  .rpdef {
+    display: none;
+  }
+
+  .autocomplete {
+    width: 250px;
+  }
+
+  .player-name {
+    text-align: center;
+  }
+
+  .stats-container {
+    margin: 0 auto;
+  }
+
+  .player-text {
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  .image {
+    margin: 0 auto;
+  }
+
+  .img-container {
+    display: block;
+  }
+
+  .img-div {
+    display: flex;
+    margin: 0 auto;
+  }
+
+  .home-link {
+    display: block;
+  }
+
+  .index-text {
+    font-size: 170%;
+    font-weight: bold;
+    margin-top: 20px;
+    padding-right: 0;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+}

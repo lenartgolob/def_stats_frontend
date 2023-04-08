@@ -64,25 +64,19 @@ function Season() {
     <div>
       <div className="player-card">
         <div>
-          <div
-            style={{
-              fontSize: "170%",
-              fontWeight: "bold",
-              marginTop: "50px",
-              paddingRight: "20px",
-            }}
-          >
+          <div className="index-text" >
             <span style={{ textDecoration: "underline", fontSize: "120%" }}>
               {year}
             </span>
-            : {topPlayer.player} has the best DEF score this season, with {topPlayer.rdef} RDEF and{" "}
+            : {topPlayer.player} had the best RPDEF score this season, with {topPlayer.rdef} RDEF and{" "}
             {topPlayer.pdef} PDEF, totalling to a {topPlayer.def} DEF.
           </div>
         </div>
         <div className="img-container">
           <div></div>
-          <div style={{ width: "300px", height: "219.23px" }}>
+          <div className="img-div">
             <img
+              className="image"
               src={topPlayer.image}
               style={{ width: "300px", height: "219.23px" }}
               alt="headshot"

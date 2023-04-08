@@ -16,12 +16,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import Footer from '../components/Footer';
 
 function Layout() {
   const [players, setPlayers] = useState([]);
   const [player, setPlayer] = useState("");
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isSeasonsClicked, setIsSeasonsClicked] = useState(false);
 
   const getData = async () => {
     const resp = await fetch("http://localhost:5000/players");
@@ -34,6 +36,11 @@ function Layout() {
     console.log(value);
     setPlayer(value);
   };
+
+  function handleCloseMenu() {
+    setIsDrawerOpen(false);
+    setIsSeasonsClicked(false);
+  }
 
   useEffect(() => {
     getData();
@@ -60,16 +67,82 @@ function Layout() {
             className="link-no-link home-btn"
             style={{ color: "white" }}
           >
-            <Typography style={{fontWeight: 'bold'}} variant="h6">RPDEF</Typography>
+            <Typography
+              className="rpdef"
+              style={{ fontWeight: "bold" }}
+              variant="h6"
+            >
+              RPDEF
+            </Typography>
           </a>
 
-          <Drawer open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-            <List>
-              <a className="link-no-link" href="/seasons">
-                <ListItem button>
-                  <ListItemText primary="Seasons" />
-                </ListItem>
-              </a>
+          <Drawer open={isDrawerOpen} onClose={handleCloseMenu}>
+            <List style={{ padding: "10px" }}>
+              <a className="link-no-link home-link" href="/"><ListItem
+                button
+              >
+                <ListItemText primary="Home" />
+              </ListItem></a>
+              <ListItem
+                button
+                onClick={() => setIsSeasonsClicked(!isSeasonsClicked)}
+              >
+                <ListItemText primary="Seasons" />
+              </ListItem>
+              {isSeasonsClicked && (
+                <List sx={{ pl: 2 }}>
+                  <a className="link-no-link" href="/season/13-14">
+                    <ListItem button>
+                      <ListItemText primary="13/14" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/14-15">
+                    <ListItem button>
+                      <ListItemText primary="14/15" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/15-16">
+                    <ListItem button>
+                      <ListItemText primary="15/16" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/16-17">
+                    <ListItem button>
+                      <ListItemText primary="16/17" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/17-18">
+                    <ListItem button>
+                      <ListItemText primary="17/18" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/18-19">
+                    <ListItem button>
+                      <ListItemText primary="18/19" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/19-20">
+                    <ListItem button>
+                      <ListItemText primary="19/20" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/20-21">
+                    <ListItem button>
+                      <ListItemText primary="20/21" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/21-22">
+                    <ListItem button>
+                      <ListItemText primary="21/22" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/22-23">
+                    <ListItem button>
+                      <ListItemText primary="22/23" />
+                    </ListItem>
+                  </a>
+                </List>
+              )}
               <a className="link-no-link" href="/visualization">
                 <ListItem button>
                   <ListItemText primary="Visualization" />
@@ -112,6 +185,7 @@ function Layout() {
         </Toolbar>
       </AppBar>
       <Outlet />
+      <Footer />
     </>
   );
 }
