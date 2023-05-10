@@ -15,7 +15,7 @@ export default function App() {
           <Route index element={<Index />} />
           <Route path="visualization" element={<Visualization />} />
           <Route path="seasons" element={<Seasons />} />
-          <Route path="player/:player" element={<Player />} />
+          <Route path="player/:playerId" element={<Player />} />
           <Route path="season/:year" element={<Season />} />
         </Route>
       </Routes>

@@ -5,6 +5,7 @@ import { Link } from "@mui/material";
 function Index() {
   const [players, setPlayers] = useState([]);
   const [topPlayer, setTopPlayer] = useState([]);
+  const [playerIds, setPlayerIds] = useState({});
 
   const columns = [
     { field: "id", headerName: "Rank", width: 10 },
@@ -13,7 +14,7 @@ function Index() {
       headerName: "Player",
       width: 150,
       renderCell: (params) => (
-        <Link href={`/player/${params.value}`} underline="none">
+        <Link href={`/player/${playerIds[params.value]}`} underline="none">
           {params.value}
         </Link>
       ),
@@ -30,21 +31,33 @@ function Index() {
     { field: "blk", headerName: "BLK" },
     { field: "rdef", headerName: "RDEF" },
     { field: "pdef", headerName: "PDEF" },
-    { field: "def", headerName: "DEF", width: 20 },
+    { field: "def", headerName: "RPDEF", width: 20 },
   ];
-
+  
   const getData = async () => {
-    const resp = await fetch("http://localhost:5000/top/players");
+    const resp = await fetch("http://46.101.99.4:5000/top/players");
     const json = await resp.json();
-    json.map((item, index) => {
-      item.id = (index + 1).toString();
-      return item;
+  
+    const updatedPlayerIds = {};
+  
+    const modifiedJson = json.map((item, index) => {
+      updatedPlayerIds[item.player] = item.NbaPlayerId;
+      const { NbaPlayerId, ...rest } = item;
+  
+      const modifiedItem = {
+        ...rest,
+        id: (index + 1).toString(),
+      };
+  
+      return modifiedItem;
     });
-    setPlayers(json);
+  
+    setPlayerIds(updatedPlayerIds);
+    setPlayers(modifiedJson);
   };
 
   const getTopPlayer = async () => {
-    const resp = await fetch("http://localhost:5000/top/player?year=22-23");
+    const resp = await fetch("http://46.101.99.4:5000/top/player?year=22-23");
     const json = await resp.json();
     setTopPlayer(json);
   };

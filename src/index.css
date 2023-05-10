@@ -72,6 +72,10 @@ code {
   color: white;
 }
 
+.MuiSvgIcon-root {
+  color: white;
+}
+
 .MuiDataGrid-columnHeaderTitle {
   font-weight: 500 !important;
 

@@ -7,6 +7,7 @@ function Season() {
   const { year } = useParams();
   const [seasons, setSeasons] = useState([]);
   const [topPlayer, setTopPlayer] = useState([]);
+  const [playerIds, setPlayerIds] = useState({});
 
   const columns = [
     { field: "id", headerName: "Rank", width: 10 },
@@ -15,7 +16,7 @@ function Season() {
       headerName: "Player",
       width: 150,
       renderCell: (params) => (
-        <Link href={`/player/${params.value}`} underline="none">
+        <Link href={`/player/${playerIds[params.value]}`} underline="none">
           {params.value}
         </Link>
       ),
@@ -32,26 +33,36 @@ function Season() {
     { field: "blk", headerName: "BLK" },
     { field: "rdef", headerName: "RDEF" },
     { field: "pdef", headerName: "PDEF", width: 80 },
-    { field: "def", headerName: "DEF", width: 20 },
+    { field: "def", headerName: "RPDEF", width: 20 },
   ];
 
 
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch(
-        "http://localhost:5000/season?year=" + year.replace("-", "/")
-      );
+      const resp = await fetch("http://46.101.99.4:5000/top/players");
       const json = await resp.json();
-      json.map((item, index) => {
-        item.id = (index + 1).toString();
-        return item;
+    
+      const updatedPlayerIds = {};
+    
+      const modifiedJson = json.map((item, index) => {
+        updatedPlayerIds[item.player] = item.NbaPlayerId;
+        const { NbaPlayerId, ...rest } = item;
+    
+        const modifiedItem = {
+          ...rest,
+          id: (index + 1).toString(),
+        };
+    
+        return modifiedItem;
       });
-      setSeasons(json);
+    
+      setPlayerIds(updatedPlayerIds);
+      setSeasons(modifiedJson);
     };
 
     const getTopPlayer = async () => {
-      const resp = await fetch(`http://localhost:5000/top/player?year=${year}`);
+      const resp = await fetch(`http://46.101.99.4:5000/top/player?year=${year}`);
       const json = await resp.json();
       setTopPlayer(json);
     };

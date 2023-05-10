@@ -20,20 +20,21 @@ import Footer from '../components/Footer';
 
 function Layout() {
   const [players, setPlayers] = useState([]);
-  const [player, setPlayer] = useState("");
+  const [player, setPlayer] = useState({
+    id: "",
+    name: ""
+  });
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isSeasonsClicked, setIsSeasonsClicked] = useState(false);
 
   const getData = async () => {
-    const resp = await fetch("http://localhost:5000/players");
+    const resp = await fetch("http://46.101.99.4:5000/players");
     const json = await resp.json();
-    setPlayers(json.map((a) => a.Player));
+    setPlayers(json);
   };
 
   const handleInputChange = (event, value) => {
-    console.log("lala");
-    console.log(value);
     setPlayer(value);
   };
 
@@ -154,10 +155,11 @@ function Layout() {
             disablePortal
             id="combo-box-demo"
             options={players}
+            getOptionLabel={(option) => option.Player}
             onChange={handleInputChange}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                navigate(`/player/${player}`);
+                navigate(`/player/${player.NbaPlayerId}`);
               }
             }}
             renderInput={(params) => (
@@ -169,7 +171,7 @@ function Layout() {
                 InputProps={{
                   ...params.InputProps,
                   startAdornment: (
-                    <a href={`/player/${player}`}>
+                    <a href={`/player/${player.NbaPlayerId}`}>
                       <InputAdornment position="start">
                         {" "}
                         <SearchIcon />

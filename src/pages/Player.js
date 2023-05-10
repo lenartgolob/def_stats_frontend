@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 function Player() {
-  const { player } = useParams();
+  const { playerId } = useParams();
   const [seasons, setSeasons] = useState([]);
   const [season, setSeason] = useState([]);
-  const [image, setImage] = useState();
   const [position, setPosition] = useState();
   const [team, setTeam] = useState();
   const [active, setActive] = useState();
@@ -26,7 +25,7 @@ function Player() {
     { field: "blk", headerName: "BLK" },
     { field: "rdef", headerName: "RDEF" },
     { field: "pdef", headerName: "PDEF" },
-    { field: "def", headerName: "DEF" },
+    { field: "def", headerName: "RPDEF" },
   ];
 
   const seasonWithHighestDef = seasons.reduce((acc, curr) => {
@@ -38,8 +37,10 @@ function Player() {
   }, {def: -Infinity}); 
 
   useEffect(() => {
+    console.log("lalal");
+    console.log(playerId);
     const getData = async () => {
-      const resp = await fetch("http://localhost:5000/player?name=" + player);
+      const resp = await fetch("http://46.101.99.4:5000/player?id=" + playerId);
       const json = await resp.json();
       const s = json[json.length-1];
       setSeason(s)
@@ -49,22 +50,21 @@ function Player() {
       console.log(json);
     };
 
-    const getImage = async () => {
-      const resp = await fetch("http://localhost:5000/image?name=" + player);
+    const getStatus = async () => {
+      const resp = await fetch("http://46.101.99.4:5000/status?id=" + playerId);
       const json = await resp.json();
-      setImage(json.link);
       setActive(json.active)
     };
 
     getData();
-    getImage();
-  }, [player]);
+    getStatus();
+  }, [playerId]);
 
   return (
     <div>
       <div className="player-card">
         <div>
-          <div className="player-name" style={{ fontSize: "250%", fontWeight: "bold" }}>{player}</div>
+          <div className="player-name" style={{ fontSize: "250%", fontWeight: "bold" }}>{season.player}</div>
           <div
             style={{
               textAlign: "center",
@@ -100,7 +100,7 @@ function Player() {
           <div></div>
           <div className="img-div">
             <img
-              src={image}
+              src={`https://cdn.nba.com/headshots/nba/latest/1040x760/${playerId}.png?imwidth=1040&imheight=760`}
               className="image"
               style={{ width: "300px", height: "219.23px" }}
               alt="headshot"
