@@ -37,21 +37,18 @@ function Player() {
   }, {def: -Infinity}); 
 
   useEffect(() => {
-    console.log("lalal");
-    console.log(playerId);
     const getData = async () => {
-      const resp = await fetch("http://46.101.99.4:5000/player?id=" + playerId);
+      const resp = await fetch("https://46.101.99.4/player?id=" + playerId);
       const json = await resp.json();
       const s = json[json.length-1];
       setSeason(s)
       setPosition(s.position);
       setTeam(s.team);
       setSeasons(json);
-      console.log(json);
     };
 
     const getStatus = async () => {
-      const resp = await fetch("http://46.101.99.4:5000/status?id=" + playerId);
+      const resp = await fetch("https://46.101.99.4/status?id=" + playerId);
       const json = await resp.json();
       setActive(json.active)
     };

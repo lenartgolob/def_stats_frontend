@@ -29,7 +29,7 @@ function Layout() {
   const [isSeasonsClicked, setIsSeasonsClicked] = useState(false);
 
   const getData = async () => {
-    const resp = await fetch("http://46.101.99.4:5000/players");
+    const resp = await fetch("https://46.101.99.4/players");
     const json = await resp.json();
     setPlayers(json);
   };

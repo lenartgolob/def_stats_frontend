@@ -35,7 +35,7 @@ function Index() {
   ];
   
   const getData = async () => {
-    const resp = await fetch("http://46.101.99.4:5000/top/players");
+    const resp = await fetch("https://46.101.99.4/top/players");
     const json = await resp.json();
   
     const updatedPlayerIds = {};
@@ -57,7 +57,7 @@ function Index() {
   };
 
   const getTopPlayer = async () => {
-    const resp = await fetch("http://46.101.99.4:5000/top/player?year=22-23");
+    const resp = await fetch("https://46.101.99.4/top/player?year=22-23");
     const json = await resp.json();
     setTopPlayer(json);
   };
