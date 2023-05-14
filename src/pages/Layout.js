@@ -29,7 +29,7 @@ function Layout() {
   const [isSeasonsClicked, setIsSeasonsClicked] = useState(false);
 
   const getData = async () => {
-    const resp = await fetch("https://46.101.99.4/players");
+    const resp = await fetch("https://rpdef-api.online/players");
     const json = await resp.json();
     setPlayers(json);
   };
@@ -144,11 +144,7 @@ function Layout() {
                   </a>
                 </List>
               )}
-              <a className="link-no-link" href="/visualization">
-                <ListItem button>
-                  <ListItemText primary="Visualization" />
-                </ListItem>
-              </a>
+
             </List>
           </Drawer>
           <Autocomplete

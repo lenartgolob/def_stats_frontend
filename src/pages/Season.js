@@ -33,14 +33,16 @@ function Season() {
     { field: "blk", headerName: "BLK" },
     { field: "rdef", headerName: "RDEF" },
     { field: "pdef", headerName: "PDEF", width: 80 },
-    { field: "def", headerName: "RPDEF", width: 20 },
+    { field: "def", headerName: "RPDEF" },
   ];
 
 
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch("https://46.101.99.4/top/players");
+      const resp = await fetch(
+        "https://rpdef-api.online/season?year=" + year.replace("-", "/")
+      );
       const json = await resp.json();
     
       const updatedPlayerIds = {};
@@ -62,7 +64,7 @@ function Season() {
     };
 
     const getTopPlayer = async () => {
-      const resp = await fetch(`https://46.101.99.4/top/player?year=${year}`);
+      const resp = await fetch(`https://rpdef-api.online/top/player?year=${year}`);
       const json = await resp.json();
       setTopPlayer(json);
     };
@@ -97,6 +99,20 @@ function Season() {
       </div>
       <div style={{ height: 700, width: "95%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} />
+      </div>
+      <div style={{ marginTop: 50 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <img src={require("../assets/scatter-plot/" + year + "-all.png")} alt="Scatter plot all" width={1000} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
+          <img src={require("../assets/scatter-plot/" + year + "-guards.png")} alt="Scatter plot guards" width={1000} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
+          <img src={require("../assets/scatter-plot/" + year + "-forwards.png")} alt="Scatter plot forwards" width={1000} />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
+          <img src={require("../assets/scatter-plot/" + year + "-centers.png")} alt="Scatter plot centers" width={1000} />
+        </div>
       </div>
       <br />
       <br />

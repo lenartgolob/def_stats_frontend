@@ -30,12 +30,12 @@ function Index() {
     { field: "stl", headerName: "STL" },
     { field: "blk", headerName: "BLK" },
     { field: "rdef", headerName: "RDEF" },
-    { field: "pdef", headerName: "PDEF" },
-    { field: "def", headerName: "RPDEF", width: 20 },
+    { field: "pdef", headerName: "PDEF", width: 80 },
+    { field: "def", headerName: "RPDEF" },
   ];
   
   const getData = async () => {
-    const resp = await fetch("https://46.101.99.4/top/players");
+    const resp = await fetch("https://rpdef-api.online/top/players");
     const json = await resp.json();
   
     const updatedPlayerIds = {};
@@ -57,7 +57,7 @@ function Index() {
   };
 
   const getTopPlayer = async () => {
-    const resp = await fetch("https://46.101.99.4/top/player?year=22-23");
+    const resp = await fetch("https://rpdef-api.online/top/player?year=22-23");
     const json = await resp.json();
     setTopPlayer(json);
   };

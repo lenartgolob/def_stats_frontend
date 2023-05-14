@@ -38,7 +38,7 @@ function Player() {
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch("https://46.101.99.4/player?id=" + playerId);
+      const resp = await fetch("https://rpdef-api.online/player?id=" + playerId);
       const json = await resp.json();
       const s = json[json.length-1];
       setSeason(s)
@@ -48,7 +48,7 @@ function Player() {
     };
 
     const getStatus = async () => {
-      const resp = await fetch("https://46.101.99.4/status?id=" + playerId);
+      const resp = await fetch("https://rpdef-api.online/status?id=" + playerId);
       const json = await resp.json();
       setActive(json.active)
     };
@@ -107,6 +107,16 @@ function Player() {
       </div>
       <div style={{ width: "95%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} autoHeight />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+        {(() => {
+          try {
+            const imageUrl = require("../assets/players-through-years/" + playerId + ".png");
+            return <img src={imageUrl} alt="player graph" width={700} />;
+          } catch (error) {
+            return null;
+          }
+        })()}
       </div>
       <br />
       <br />
