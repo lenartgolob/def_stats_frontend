@@ -53,7 +53,7 @@ function Player() {
       
       const graph = json
         .filter(item => item.def > 0)
-        .map(item => ({ id: item.id, rpdef: item.def, rdef: item.rdef, pdef: item.pdef }));
+        .map(item => ({ id: item.id, RPDEF: item.def, RDEF: item.rdef, PDEF: item.pdef }));
     
       setGraphData(graph);
     };
@@ -133,9 +133,9 @@ function Player() {
       <div style={{ display: 'flex', justifyContent: 'center'}}>
       <ResponsiveContainer width={containerWidth} height={400}>
         <LineChart className="line-chart" data={graphData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-          <Line type="monotone" dataKey="rpdef" stroke="#2975A9" />
-          <Line type="monotone" dataKey="rdef" stroke="#ED8429" />
-          <Line type="monotone" dataKey="pdef" stroke="#3A983A" />
+          <Line type="monotone" dataKey="RPDEF" stroke="#2975A9" />
+          <Line type="monotone" dataKey="RDEF" stroke="#ED8429" />
+          <Line type="monotone" dataKey="PDEF" stroke="#3A983A" />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis dataKey="id" />
           <YAxis />
