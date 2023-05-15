@@ -92,44 +92,9 @@ function Layout() {
               </ListItem>
               {isSeasonsClicked && (
                 <List sx={{ pl: 2 }}>
-                  <a className="link-no-link" href="/season/13-14">
+                  <a className="link-no-link" href="/season/22-23">
                     <ListItem button>
-                      <ListItemText primary="13/14" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/14-15">
-                    <ListItem button>
-                      <ListItemText primary="14/15" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/15-16">
-                    <ListItem button>
-                      <ListItemText primary="15/16" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/16-17">
-                    <ListItem button>
-                      <ListItemText primary="16/17" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/17-18">
-                    <ListItem button>
-                      <ListItemText primary="17/18" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/18-19">
-                    <ListItem button>
-                      <ListItemText primary="18/19" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/19-20">
-                    <ListItem button>
-                      <ListItemText primary="19/20" />
-                    </ListItem>
-                  </a>
-                  <a className="link-no-link" href="/season/20-21">
-                    <ListItem button>
-                      <ListItemText primary="20/21" />
+                      <ListItemText primary="22/23" />
                     </ListItem>
                   </a>
                   <a className="link-no-link" href="/season/21-22">
@@ -137,9 +102,44 @@ function Layout() {
                       <ListItemText primary="21/22" />
                     </ListItem>
                   </a>
-                  <a className="link-no-link" href="/season/22-23">
+                  <a className="link-no-link" href="/season/20-21">
                     <ListItem button>
-                      <ListItemText primary="22/23" />
+                      <ListItemText primary="20/21" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/19-20">
+                    <ListItem button>
+                      <ListItemText primary="19/20" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/18-19">
+                    <ListItem button>
+                      <ListItemText primary="18/19" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/17-18">
+                    <ListItem button>
+                      <ListItemText primary="17/18" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/16-17">
+                    <ListItem button>
+                      <ListItemText primary="16/17" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/15-16">
+                    <ListItem button>
+                      <ListItemText primary="15/16" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/14-15">
+                    <ListItem button>
+                      <ListItemText primary="14/15" />
+                    </ListItem>
+                  </a>
+                  <a className="link-no-link" href="/season/13-14">
+                    <ListItem button>
+                      <ListItemText primary="13/14" />
                     </ListItem>
                   </a>
                 </List>
