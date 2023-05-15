@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 function Player() {
   const { playerId } = useParams();
@@ -9,6 +10,10 @@ function Player() {
   const [position, setPosition] = useState();
   const [team, setTeam] = useState();
   const [active, setActive] = useState();
+  const [graphData, setGraphData] = useState();
+  const isScreenWidthBelow600 = window.innerWidth < 600;
+  const containerWidth = isScreenWidthBelow600 ? '950%' : '50%';
+
 
 
   const columns = [
@@ -45,6 +50,12 @@ function Player() {
       setPosition(s.position);
       setTeam(s.team);
       setSeasons(json);
+      
+      const graph = json
+        .filter(item => item.def > 0)
+        .map(item => ({ id: item.id, rpdef: item.def, rdef: item.rdef, pdef: item.pdef }));
+    
+      setGraphData(graph);
     };
 
     const getStatus = async () => {
@@ -108,15 +119,29 @@ function Player() {
       <div style={{ width: "95%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} autoHeight />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
         {(() => {
           try {
             const imageUrl = require("../assets/players-through-years/" + playerId + ".png");
-            return <img src={imageUrl} alt="player graph" width={700} />;
+            return <img src={imageUrl} className="player-years-img" alt="player graph" />;
           } catch (error) {
             return null;
           }
         })()}
+      </div> */}
+      <h3 className="graph-title" style={{marginTop: 50, textAlign: "center"}}>RPDEF of {season.player} through the years</h3>
+      <div style={{ display: 'flex', justifyContent: 'center'}}>
+      <ResponsiveContainer width={containerWidth} height={400}>
+        <LineChart className="line-chart" data={graphData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <Line type="monotone" dataKey="rpdef" stroke="#2975A9" />
+          <Line type="monotone" dataKey="rdef" stroke="#ED8429" />
+          <Line type="monotone" dataKey="pdef" stroke="#3A983A" />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <XAxis dataKey="id" />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
+        </ResponsiveContainer>
       </div>
       <br />
       <br />

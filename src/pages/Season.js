@@ -102,16 +102,16 @@ function Season() {
       </div>
       <div style={{ marginTop: 50 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <img src={require("../assets/scatter-plot/" + year + "-all.png")} alt="Scatter plot all" width={1000} />
+          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-all.png")} alt="Scatter plot all" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img src={require("../assets/scatter-plot/" + year + "-guards.png")} alt="Scatter plot guards" width={1000} />
+          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-guards.png")} alt="Scatter plot guards" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img src={require("../assets/scatter-plot/" + year + "-forwards.png")} alt="Scatter plot forwards" width={1000} />
+          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-forwards.png")} alt="Scatter plot forwards" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img src={require("../assets/scatter-plot/" + year + "-centers.png")} alt="Scatter plot centers" width={1000} />
+          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-centers.png")} alt="Scatter plot centers" />
         </div>
       </div>
       <br />
