@@ -4,6 +4,7 @@ import Layout from "./pages/Layout";
 import Index from "./pages/Index";
 import Player from "./pages/Player";
 import Season from "./pages/Season";
+import About from "./pages/About";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route index element={<Index />} />
           <Route path="player/:playerId" element={<Player />} />
           <Route path="season/:year" element={<Season />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </BrowserRouter>

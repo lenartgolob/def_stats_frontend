@@ -84,6 +84,9 @@ function Layout() {
               >
                 <ListItemText primary="Home" />
               </ListItem></a>
+              <a className="link-no-link" href="/about"><ListItem button>
+                <ListItemText primary="About" />
+              </ListItem></a>
               <ListItem
                 button
                 onClick={() => setIsSeasonsClicked(!isSeasonsClicked)}
