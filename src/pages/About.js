@@ -12,7 +12,7 @@ function Player() {
     return (    
         <div>
             <div className="about">
-            <h3>What is Rim Perimeter Defensive Factor (RPDEF)?</h3>
+            <h2 style={{marginTop: 40}}>What is Rim Perimeter Defensive Factor (RPDEF)?</h2>
             <p>RPDEF is a comprehensive metric that evaluates an individual player's defense and their contribution to the team's defense. The rating takes into account both traditional 
             statistics such as blocks, steals, and charges, as well as location-based data that indicates the player's effectiveness in covering specific areas of the court. 
             The results also depend on the player's contribution to team defense and the overall quality of team defense. RPDEF is divided into two components: 
@@ -24,7 +24,7 @@ function Player() {
              <p>PDEF is a rating that assesses an individual player's defense on the perimeter, focusing on their ability to guard against perimeter shots and 
                 prevent opponents from penetrating into the key area. It provides valuable insights into a player's effectiveness in defending the basket and their impact on the team's overall 
              defensive performance in that specific area.</p>
-             <h4 style={{marginBottom: 0}}>Comparison with other defensive ratings</h4>
+             <h3 style={{marginBottom: 0}}>Comparison with other defensive ratings</h3>
             <p style={{marginTop: 10}}>We compared RPDEF with other widely used defensive metrics that are publicly available. The table illustrates the average percentile of player ratings across different metrics. To evaluate the effectiveness of RPDEF, we assessed all players selected for the All-Defensive teams from the 2013/14 season to the 2022/23 season, calculating their average percentile based on their respective ratings. The results indicate that RPDEF consistently assigns the highest ratings to players chosen for the All-Defensive teams, highlighting its efficacy in identifying top defensive performers.</p>
             <TableContainer className="table-comp" component={Paper}>
                 <Table sx={{ minWidth: 400 }} aria-label="simple table">
