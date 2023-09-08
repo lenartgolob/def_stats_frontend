@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 function Player() {
 
     return (    
-        <div>
+        <div className="page-body-about">
             <div className="about">
             <h2 style={{marginTop: 40}}>What is Rim Perimeter Defensive Factor (RPDEF)?</h2>
             <p>RPDEF is a comprehensive metric that evaluates an individual player's defense and their contribution to the team's defense. The rating takes into account both traditional 

@@ -17,20 +17,20 @@ function Player() {
 
 
   const columns = [
-    { field: "id", headerName: "Year" },
-    { field: "player", headerName: "Player" },
-    { field: "team", headerName: "Team" },
-    { field: "gp", headerName: "GP" },
-    { field: "min", headerName: "MIN" },
-    { field: "pts", headerName: "PTS" },
-    { field: "reb", headerName: "REB" },
-    { field: "ast", headerName: "AST" },
-    { field: "tov", headerName: "TOV" },
-    { field: "stl", headerName: "STL" },
-    { field: "blk", headerName: "BLK" },
-    { field: "rdef", headerName: "RDEF" },
-    { field: "pdef", headerName: "PDEF" },
-    { field: "def", headerName: "RPDEF" },
+    { field: "id", headerName: "Year", flex: 1 },
+    { field: "player", headerName: "Player", flex: 1 },
+    { field: "team", headerName: "Team", flex: 1 },
+    { field: "gp", headerName: "GP", flex: 1 },
+    { field: "min", headerName: "MIN", flex: 1 },
+    { field: "pts", headerName: "PTS", flex: 1 },
+    { field: "reb", headerName: "REB", flex: 1 },
+    { field: "ast", headerName: "AST", flex: 1 },
+    { field: "tov", headerName: "TOV", flex: 1 },
+    { field: "stl", headerName: "STL", flex: 1 },
+    { field: "blk", headerName: "BLK", flex: 1 },
+    { field: "rdef", headerName: "RDEF", flex: 1 },
+    { field: "pdef", headerName: "PDEF", flex: 1 },
+    { field: "def", headerName: "RPDEF", flex: 1 },
   ];
 
   const seasonWithHighestDef = seasons.reduce((acc, curr) => {
@@ -69,7 +69,7 @@ function Player() {
   }, [playerId]);
 
   return (
-    <div>
+    <div className="page-body">
       <div className="player-card">
         <div>
           <div className="player-name" style={{ fontSize: "250%", fontWeight: "bold" }}>{season.player}</div>
@@ -116,7 +116,7 @@ function Player() {
           </div>
         </div>
       </div>
-      <div style={{ width: "95%", margin: "0 auto" }}>
+      <div style={{ width: "90%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} autoHeight />
       </div>
       {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>

@@ -104,9 +104,21 @@ code {
   padding-right: 40px;
 }
 
+.page-body {
+  min-height: calc(100vh - 128px);
+}
+
+.page-body-about {
+  min-height: calc(100vh - 170px);
+}
+
+
 .footer {
   background-color: #0B233F !important;
   text-align: center;
+  position: relative;
+  left: 0;
+  bottom: 0;
 
 }
 

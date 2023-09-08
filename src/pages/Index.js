@@ -19,19 +19,19 @@ function Index() {
         </Link>
       ),
     },
-    { field: "team", headerName: "Team", width: 80 },
-    { field: "position", headerName: "Position" },
-    { field: "gp", headerName: "GP" },
-    { field: "min", headerName: "MIN" },
-    { field: "pts", headerName: "PTS" },
-    { field: "reb", headerName: "REB" },
-    { field: "ast", headerName: "AST" },
-    { field: "tov", headerName: "TOV" },
-    { field: "stl", headerName: "STL" },
-    { field: "blk", headerName: "BLK" },
-    { field: "rdef", headerName: "RDEF" },
-    { field: "pdef", headerName: "PDEF", width: 80 },
-    { field: "def", headerName: "RPDEF" },
+    { field: "team", headerName: "Team", width: 80, flex: 1 },
+    { field: "position", headerName: "Position", flex: 1 },
+    { field: "gp", headerName: "GP", flex: 1 },
+    { field: "min", headerName: "MIN", flex: 1 },
+    { field: "pts", headerName: "PTS", flex: 1 },
+    { field: "reb", headerName: "REB", flex: 1 },
+    { field: "ast", headerName: "AST", flex: 1 },
+    { field: "tov", headerName: "TOV", flex: 1 },
+    { field: "stl", headerName: "STL", flex: 1 },
+    { field: "blk", headerName: "BLK", flex: 1 },
+    { field: "rdef", headerName: "RDEF", flex: 1 },
+    { field: "pdef", headerName: "PDEF", width: 80, flex: 1 },
+    { field: "def", headerName: "RPDEF", flex: 1 },
   ];
   
   const getData = async () => {
@@ -68,7 +68,7 @@ function Index() {
   }, []);
 
   return (
-    <div>
+    <div className="page-body">
       <div className="player-card">
         <div>
           <div className="index-text">
@@ -91,7 +91,7 @@ function Index() {
           </div>
         </div>
       </div>
-      <div style={{ width: "95%", margin: "0 auto" }}>
+      <div style={{ width: "90%", margin: "0 auto" }}>
         <DataGrid rows={players} columns={columns} autoHeight />
       </div>
       <br />
