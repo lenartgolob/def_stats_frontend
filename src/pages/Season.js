@@ -2,13 +2,22 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "@mui/material";
-// import ScatterPlot from '../components/ScatterPlot';
+import ScatterPlot from '../components/ScatterPlot';
+import FilterOptions from '../components/FilterOptions';
 
 function Season() {
   const { year } = useParams();
   const [seasons, setSeasons] = useState([]);
   const [topPlayer, setTopPlayer] = useState([]);
   const [playerIds, setPlayerIds] = useState({});
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
+  const [filters, setFilters] = useState({
+    all: true,
+    guards: false,
+    forwards: false,
+    centers: false,
+  });
 
   const columns = [
     { field: "id", headerName: "Rank", width: 10 },
@@ -62,6 +71,7 @@ function Season() {
     
       setPlayerIds(updatedPlayerIds);
       setSeasons(modifiedJson);
+      setData(json);
     };
 
     const getTopPlayer = async () => {
@@ -73,6 +83,54 @@ function Season() {
     getData();
     getTopPlayer();
   }, [year]);
+
+  const handleFilterChange = (filterType) => {
+    setFilters((prevFilters) => {
+      console.log(prevFilters)
+      // If the selected filter is already true, reset all filters to true (selecting "All")
+      if (prevFilters[filterType]) {
+        return { all: true, guards: false, forwards: false, centers: false };
+      }
+
+      // Otherwise, set the selected filter to true and reset others to false
+      return {
+        all: filterType === 'all',
+        guards: filterType === 'guards',
+        forwards: filterType === 'forwards',
+        centers: filterType === 'centers',
+      };
+    });
+  };
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let newFilteredData;
+    
+      if (filters.all || (!filters.guards && !filters.forwards && !filters.centers)) {
+        // If "All" is selected or no specific filter is selected, use the original dataset
+        newFilteredData = data;
+      } else {
+        // Apply filters based on the selected positions
+        newFilteredData = data.filter((player) => {
+          if (filters.guards && player.position.includes('G')) {
+            return true;
+          }
+          if (filters.forwards && player.position.includes('F')) {
+            return true;
+          }
+          if (filters.centers && player.position.includes('C')) {
+            return true;
+          }
+          return false;
+        });
+      }
+    
+      setFilteredData(newFilteredData);
+    };
+
+    applyFilters();
+  }, [data, filters]);
+  
 
   return (
     <div className="page-body">
@@ -101,21 +159,16 @@ function Season() {
       <div style={{ height: 700, width: "90%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} />
       </div>
-      {/* <div style={{ marginTop: 50 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-all.png")} alt="Scatter plot all" />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-guards.png")} alt="Scatter plot guards" />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-forwards.png")} alt="Scatter plot forwards" />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
-          <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-centers.png")} alt="Scatter plot centers" />
-        </div>
-      </div> */}
-            {/* <ScatterPlot data={seasons} /> */}
+      <div style={{ textAlign: 'center', marginTop: 100}}>
+        <p style={{fontSize: '120%', fontWeight: 'bold'}}>Where every player in the NBA stands, according to RPDEF</p>
+        <p>Defensive ratings for NBA players. Filter by positions to find players.</p>
+      </div>
+      <div style={{ textAlign: 'center', marginTop: 20 }}>
+        <FilterOptions filters={filters} onFilterChange={handleFilterChange} />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+        <ScatterPlot data={filteredData} />
+      </div>
       <br />
       <br />
       <br />
