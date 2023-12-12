@@ -57,7 +57,7 @@ function Index() {
   };
 
   const getTopPlayer = async () => {
-    const resp = await fetch("https://rpdef-api.online/top/player?year=22-23");
+    const resp = await fetch("https://rpdef-api.online/top/player?year=23-24");
     const json = await resp.json();
     setTopPlayer(json);
   };

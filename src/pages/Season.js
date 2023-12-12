@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "@mui/material";
+// import ScatterPlot from '../components/ScatterPlot';
 
 function Season() {
   const { year } = useParams();
@@ -100,7 +101,7 @@ function Season() {
       <div style={{ height: 700, width: "90%", margin: "0 auto" }}>
         <DataGrid rows={seasons} columns={columns} />
       </div>
-      <div style={{ marginTop: 50 }}>
+      {/* <div style={{ marginTop: 50 }}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-all.png")} alt="Scatter plot all" />
         </div>
@@ -113,7 +114,8 @@ function Season() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 50 }}>
           <img className="season-graph-img" src={require("../assets/scatter-plot/" + year + "-centers.png")} alt="Scatter plot centers" />
         </div>
-      </div>
+      </div> */}
+            {/* <ScatterPlot data={seasons} /> */}
       <br />
       <br />
       <br />

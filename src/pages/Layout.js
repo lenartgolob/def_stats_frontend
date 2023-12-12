@@ -95,6 +95,11 @@ function Layout() {
               </ListItem>
               {isSeasonsClicked && (
                 <List sx={{ pl: 2 }}>
+                  <a className="link-no-link" href="/season/23-24">
+                    <ListItem button>
+                      <ListItemText primary="23/24" />
+                    </ListItem>
+                  </a>
                   <a className="link-no-link" href="/season/22-23">
                     <ListItem button>
                       <ListItemText primary="22/23" />
