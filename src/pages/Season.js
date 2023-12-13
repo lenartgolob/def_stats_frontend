@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "@mui/material";
 import ScatterPlot from '../components/ScatterPlot';
@@ -18,6 +18,7 @@ function Season() {
     forwards: false,
     centers: false,
   });
+  const scatterPlotRef = useRef();
 
   const columns = [
     { field: "id", headerName: "Rank", width: 10 },
@@ -130,6 +131,14 @@ function Season() {
 
     applyFilters();
   }, [data, filters]);
+
+  useEffect(() => {
+    // Check if the ScatterPlot content overflows horizontally
+    const isOverflowing = scatterPlotRef.current.scrollWidth > scatterPlotRef.current.clientWidth;
+
+    // Apply styles based on the overflow condition
+    scatterPlotRef.current.style.overflowX = isOverflowing ? 'scroll' : 'hidden';
+  }, [filteredData]);
   
 
   return (
@@ -166,7 +175,7 @@ function Season() {
       <div style={{ textAlign: 'center', marginTop: 20 }}>
         <FilterOptions filters={filters} onFilterChange={handleFilterChange} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '75vh' }}>
+      <div ref={scatterPlotRef} style={{ textAlign: 'center' }}>
         <ScatterPlot data={filteredData} />
       </div>
       <br />

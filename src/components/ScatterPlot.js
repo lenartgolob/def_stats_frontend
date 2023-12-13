@@ -19,7 +19,7 @@ const ScatterPlot = ({ data }) => {
     const filteredData = data.filter(d => d.pdef !== 0 && d.rdef !== 0);
 
     // Add some padding to the scales
-    const padding = 0.1;
+    const padding = 0.2;
 
     // Create scales for y and x axes using the smallest non-zero values to the largest values with padding
     const yScale = d3.scaleLinear().domain([d3.min(filteredData, d => d.pdef) - padding, d3.max(data, d => d.pdef) + padding]).range([height, 0]);
