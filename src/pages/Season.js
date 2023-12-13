@@ -175,7 +175,7 @@ function Season() {
       <div style={{ textAlign: 'center', marginTop: 20 }}>
         <FilterOptions filters={filters} onFilterChange={handleFilterChange} />
       </div>
-      <div ref={scatterPlotRef} style={{ textAlign: 'center' }}>
+      <div ref={scatterPlotRef} style={{ textAlign: 'center', paddingLeft: 10 }}>
         <ScatterPlot data={filteredData} />
       </div>
       <br />

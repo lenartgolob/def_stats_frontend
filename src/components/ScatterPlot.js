@@ -12,7 +12,7 @@ const ScatterPlot = ({ data }) => {
 
     // Define margins and dimensions for the plot
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    const width = 900 - margin.left - margin.right;
+    const width = 1000 - margin.left - margin.right;
     const height = 600 - margin.top - margin.bottom;
 
     // Filter out data points with 0 values for pdef and rdef
@@ -27,29 +27,32 @@ const ScatterPlot = ({ data }) => {
 
     // Add y-axis with label
     svg
-    .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`)
-    .call(d3.axisLeft(yScale))
-    .append('text')
-    .attr('transform', 'rotate(-90)')
-    .attr('y', -margin.left)
-    .attr('x', -height / 2)
-    .attr('dy', '1em')
-    .style('text-anchor', 'middle')
-    .text('PDEF');
+      .append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .call(d3.axisLeft(yScale));
+
+    svg
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', margin.left - 43) // Adjusted positioning with more distance
+      .attr('x', 0 - height / 2)
+      .attr('dy', '1em')
+      .style('text-anchor', 'middle')
+      .text('PDEF');
 
     // Add x-axis with label
     svg
-    .append('g')
-    .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
-    .call(d3.axisBottom(xScale))
-    .append('text')
-    .attr('x', width / 2)
-    .attr('y', margin.bottom - 10)
-    .style('text-anchor', 'middle')
-    .text('RDEF');
+      .append('g')
+      .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
+      .call(d3.axisBottom(xScale));
 
-    // ...
+    svg
+      .append('text')
+      .attr('x', width / 2 + margin.left)
+      .attr('y', height + margin.top + margin.bottom ) // Adjusted positioning with more distance
+      .style('text-anchor', 'middle')
+      .text('RDEF');
+
 
     // Add circles with images for each non-zero data point
     svg
