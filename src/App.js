@@ -5,6 +5,7 @@ import Index from "./pages/Index";
 import Player from "./pages/Player";
 import Season from "./pages/Season";
 import About from "./pages/About";
+import PredictionModel from "./pages/PredictionModel";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="player/:playerId" element={<Player />} />
           <Route path="season/:year" element={<Season />} />
           <Route path="about" element={<About />} />
+          <Route path="prediction-model" element={<PredictionModel />} />
         </Route>
       </Routes>
     </BrowserRouter>

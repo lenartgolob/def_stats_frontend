@@ -152,7 +152,9 @@ function Layout() {
                   </a>
                 </List>
               )}
-
+              <a className="link-no-link" href="/prediction-model"><ListItem button>
+                <ListItemText primary="Predictions" />
+              </ListItem></a>
             </List>
           </Drawer>
           <Autocomplete
