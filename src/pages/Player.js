@@ -97,7 +97,7 @@ function Player() {
                 <div className="stat-num">{active ? season.ast : seasonWithHighestDef.ast}</div>
               </div>
               <div>
-                <div className="stat-category">DEF</div>
+                <div className="stat-category">RPDEF</div>
                 <div className="stat-num">{active ? season.def : seasonWithHighestDef.def}</div>
               </div>
             </div>
