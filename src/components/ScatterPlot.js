@@ -5,27 +5,32 @@ const ScatterPlot = ({ data }) => {
   const svgRef = useRef();
 
   useEffect(() => {
-    // Access the SVG element using the ref
     const svg = d3.select(svgRef.current);
-
     svg.selectAll('*').remove();
 
-    // Define margins and dimensions for the plot
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const width = 1000 - margin.left - margin.right;
     const height = 600 - margin.top - margin.bottom;
 
-    // Filter out data points with 0 values for pdef and rdef
-    const filteredData = data.filter(d => d.pdef !== 0 && d.rdef !== 0);
+    const filteredData = data.filter((d) => d.pdef !== 0 && d.rdef !== 0);
 
-    // Add some padding to the scales
     const padding = 0.2;
 
-    // Create scales for y and x axes using the smallest non-zero values to the largest values with padding
-    const yScale = d3.scaleLinear().domain([d3.min(filteredData, d => d.pdef) - padding, d3.max(data, d => d.pdef) + padding]).range([height, 0]);
-    const xScale = d3.scaleLinear().domain([d3.min(filteredData, d => d.rdef) - padding, d3.max(data, d => d.rdef) + padding]).range([0, width]);
+    const yScale = d3
+      .scaleLinear()
+      .domain([
+        d3.min(filteredData, (d) => d.pdef) - padding,
+        d3.max(data, (d) => d.pdef) + padding,
+      ])
+      .range([height, 0]);
+    const xScale = d3
+      .scaleLinear()
+      .domain([
+        d3.min(filteredData, (d) => d.rdef) - padding,
+        d3.max(data, (d) => d.rdef) + padding,
+      ])
+      .range([0, width]);
 
-    // Add y-axis with label
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -34,13 +39,12 @@ const ScatterPlot = ({ data }) => {
     svg
       .append('text')
       .attr('transform', 'rotate(-90)')
-      .attr('y', margin.left - 43) // Adjusted positioning with more distance
+      .attr('y', margin.left - 43)
       .attr('x', 0 - height / 2)
       .attr('dy', '1em')
       .style('text-anchor', 'middle')
       .text('PDEF');
 
-    // Add x-axis with label
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
@@ -49,9 +53,37 @@ const ScatterPlot = ({ data }) => {
     svg
       .append('text')
       .attr('x', width / 2 + margin.left)
-      .attr('y', height + margin.top + margin.bottom ) // Adjusted positioning with more distance
+      .attr('y', height + margin.top + margin.bottom)
       .style('text-anchor', 'middle')
       .text('RDEF');
+
+    const loadImage = (imageUrl) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = imageUrl;
+      });
+    };
+
+    const loadImagesBatch = async (batch) => {
+      await Promise.all(
+        batch.map(async (d) => {
+          await loadImage(`../player-images/${d.NbaPlayerId}_cropped.png`);
+        })
+      );
+    };
+
+    const batchSize = 10; // Adjust the batch size as needed
+
+    const loadImages = async () => {
+      for (let i = 0; i < filteredData.length; i += batchSize) {
+        const batch = filteredData.slice(i, i + batchSize);
+        await loadImagesBatch(batch);
+      }
+    };
+
+    loadImages();
 
 
     // Add circles with images for each non-zero data point
