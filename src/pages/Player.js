@@ -30,16 +30,16 @@ function Player() {
     { field: "blk", headerName: "BLK", flex: 1 },
     { field: "rdef", headerName: "RDEF", flex: 1 },
     { field: "pdef", headerName: "PDEF", flex: 1 },
-    { field: "def", headerName: "RPDEF", flex: 1 },
+    { field: "rpdef", headerName: "RPDEF", flex: 1 },
   ];
 
   const seasonWithHighestDef = seasons.reduce((acc, curr) => {
-    if (curr.def > acc.def) {
+    if (curr.rpdef > acc.rpdef) {
       return curr;
     } else {
       return acc;
     }
-  }, {def: -Infinity}); 
+  }, {rpdef: -Infinity}); 
 
   useEffect(() => {
     const getData = async () => {
@@ -52,8 +52,8 @@ function Player() {
       setSeasons(json);
       
       const graph = json
-        .filter(item => item.def > 0)
-        .map(item => ({ id: item.id, RPDEF: item.def, RDEF: item.rdef, PDEF: item.pdef }));
+        .filter(item => item.rpdef > 0)
+        .map(item => ({ id: item.id, RPDEF: item.rpdef, RDEF: item.rdef, PDEF: item.pdef }));
     
       setGraphData(graph);
     };
@@ -98,7 +98,7 @@ function Player() {
               </div>
               <div>
                 <div className="stat-category">RPDEF</div>
-                <div className="stat-num">{active ? season.def : seasonWithHighestDef.def}</div>
+                <div className="stat-num">{active ? season.rpdef : seasonWithHighestDef.rpdef}</div>
               </div>
             </div>
             <div className="player-text" style={{width: '210px', textAlign: 'center', fontSize: '95%'}}>{active ? "2022-23 REGULAR SEASON" : seasonWithHighestDef.id + " - BEST DEFENSIVE SEASON"}</div>

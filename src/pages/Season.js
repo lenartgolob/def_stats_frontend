@@ -44,7 +44,7 @@ function Season() {
     { field: "blk", headerName: "BLK", flex: 1 },
     { field: "rdef", headerName: "RDEF", flex: 1 },
     { field: "pdef", headerName: "PDEF", width: 80, flex: 1 },
-    { field: "def", headerName: "RPDEF", flex: 1 },
+    { field: "rpdef", headerName: "RPDEF", flex: 1 },
   ];
 
 
@@ -150,7 +150,7 @@ function Season() {
               {year}
             </span>
             : {topPlayer.player} had the best RPDEF score this season, with {topPlayer.rdef} RDEF and{" "}
-            {topPlayer.pdef} PDEF, totalling to a {topPlayer.def} DEF.
+            {topPlayer.pdef} PDEF, totalling to a {topPlayer.rpdef} RPDEF.
           </div>
         </div>
         <div className="img-container">
