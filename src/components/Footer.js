@@ -6,7 +6,7 @@ const Footer = () => {
     <AppBar className='footer' position="static" color="primary">
       <Toolbar>
         <Typography className="footer-text"  variant="body1" color="inherit">
-          RPDEF stats ©
+          RPDEF stats © Author: Lenart Golob
         </Typography>
       </Toolbar>
     </AppBar>

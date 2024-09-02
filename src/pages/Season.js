@@ -52,7 +52,7 @@ function Season() {
   useEffect(() => {
     const getData = async () => {
       const resp = await fetch(
-        "https://rpdef-api.online/season?year=" + year.replace("-", "/")
+        "https://lenartgolob.pythonanywhere.com/season?year=" + year.replace("-", "/")
       );
       const json = await resp.json();
     
@@ -76,7 +76,7 @@ function Season() {
     };
 
     const getTopPlayer = async () => {
-      const resp = await fetch(`https://rpdef-api.online/top/player?year=${year}`);
+      const resp = await fetch(`https://lenartgolob.pythonanywhere.com/top/player?year=${year}`);
       const json = await resp.json();
       setTopPlayer(json);
     };

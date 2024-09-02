@@ -35,7 +35,7 @@ function Index() {
   ];
   
   const getData = async () => {
-    const resp = await fetch("https://rpdef-api.online/top/players");
+    const resp = await fetch("https://lenartgolob.pythonanywhere.com/top/players");
     const json = await resp.json();
   
     const updatedPlayerIds = {};
@@ -57,7 +57,7 @@ function Index() {
   };
 
   const getTopPlayer = async () => {
-    const resp = await fetch("https://rpdef-api.online/top/player?year=23-24");
+    const resp = await fetch("https://lenartgolob.pythonanywhere.com/top/player?year=23-24");
     const json = await resp.json();
     setTopPlayer(json);
   };

@@ -43,7 +43,7 @@ function Player() {
 
   useEffect(() => {
     const getData = async () => {
-      const resp = await fetch("https://rpdef-api.online/player?id=" + playerId);
+      const resp = await fetch("https://lenartgolob.pythonanywhere.com/player?id=" + playerId);
       const json = await resp.json();
       const s = json[json.length-1];
       setSeason(s)
@@ -59,7 +59,7 @@ function Player() {
     };
 
     const getStatus = async () => {
-      const resp = await fetch("https://rpdef-api.online/status?id=" + playerId);
+      const resp = await fetch("https://lenartgolob.pythonanywhere.com/status?id=" + playerId);
       const json = await resp.json();
       setActive(json.active)
     };

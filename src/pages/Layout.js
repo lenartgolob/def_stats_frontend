@@ -29,7 +29,7 @@ function Layout() {
   const [isSeasonsClicked, setIsSeasonsClicked] = useState(false);
 
   const getData = async () => {
-    const resp = await fetch("https://rpdef-api.online/players");
+    const resp = await fetch("https://lenartgolob.pythonanywhere.com/players");
     const json = await resp.json();
     setPlayers(json);
   };
